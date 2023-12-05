@@ -51,7 +51,7 @@ char	*ft_strchr(const char *s, int c)
 		i++;
 	}
 	if (c == '\n')
-		return ("0");
+		return (&st[i]);
 	if (c == '\0')
 		return (&st[i]);
 	return (NULL);

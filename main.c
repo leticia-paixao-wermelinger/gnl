@@ -7,16 +7,20 @@ int	main()
 	int		fd = open("./text_test.txt", O_RDONLY);
 	int		i = 1;
 	char	*ret;
+	char	*text;
 
-	ret = get_next_line(fd);
+/*	ret = get_next_line(fd);
 	printf("teste pós gnl. \nO retorno da GNL foi: %s \n", ret);
-	free(ret);
-/*	while (ret) // na condição, vai entrar uma variável onde eu vou guardar o retorno da GNL enquanto ele não for nulo. E vou mandar imprimir essa variável.
+	free(ret);*/
+	ret = get_next_line(fd);
+	while (ret) // na condição, vai entrar uma variável onde eu vou guardar o retorno da GNL enquanto ele não for nulo. E vou mandar imprimir essa variável.
 	{
-		ret = get_next_line(fd);
 		printf("Linha %i:\n", i);
 		printf("%s\n", ret);
+		if (ret)
+			free(ret);
+		ret = get_next_line(fd);
 		i++;
-		free(ret);
-	}*/
+	}
+	free(ret);
 }

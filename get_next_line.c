@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:51:37 by lpaixao-          #+#    #+#             */
-/*   Updated: 2023/12/05 17:24:25 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:24:18 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ char	*get_next_line(int fd)
 		file[BUFFER_SIZE] = '\0';
 		i = i + 1;
 		printf("Passagem %i pelo while() da GNL. \nConteúdo de file: %s \n", i, file);
-		if ((ft_strchr(file, '\n')[0] != '\n' && ft_strchr(file, '\0')[0] != '\0') && (!str))
+		if (ft_strchr(file, '\n')[0] != '\n' && (!str))
 		{
 			str = ft_substr(file, 0, BUFFER_SIZE);
 			printf("str pós substr: %s\n", str);
 		}
-		else if ((ft_strchr(file, '\n')[0] != '\n' && ft_strchr(file, '\0')[0] != '\0') && str)
+		else if (ft_strchr(file, '\n')[0] != '\n' && str)
 		{
 			str = ft_strjoin(str, file);
 			printf("passou o join\n");
@@ -49,6 +49,7 @@ char	*get_next_line(int fd)
 		}
 		else if (ft_strchr(file, '\n')[0] == '\n' || ft_strchr(file, '\0')[0] == '\0')
 		{
+			str = ft_strjoin(str, file);
 			free(file);
 			printf("olá, João!");
 			break ;
