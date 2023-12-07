@@ -4,10 +4,10 @@
 int	main()
 {
 //	char	*filename = "/text_test.txt";
-	int		fd = open("./text_test.txt", O_RDONLY);
+	int		fd = open("./text2.txt", O_RDONLY);
 	int		i = 1;
 	char	*ret;
-	char	*text;
+//	char	*text;
 
 /*	ret = get_next_line(fd);
 	printf("teste pós gnl. \nO retorno da GNL foi: %s \n", ret);
@@ -18,9 +18,14 @@ int	main()
 		printf("Linha %i:\n", i);
 		printf("%s\n", ret);
 		if (ret)
+		{
 			free(ret);
+			ret = NULL;
+		}
 		ret = get_next_line(fd);
 		i++;
+		if (i > 10)
+			break ;
 	}
-	free(ret);
+//	free(ret);
 }

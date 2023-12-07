@@ -6,35 +6,13 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:53:19 by lpaixao-          #+#    #+#             */
-/*   Updated: 2023/12/05 13:24:16 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2023/12/07 20:21:40 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 // helper functions
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	unsigned int	count;
-	unsigned int	size_src;
-
-	count = 0;
-	size_src = 0;
-	while (src[size_src])
-		size_src++;
-	if (size > 0)
-	{
-		while (src[count] && count < (size - 1))
-		{
-			dst[count] = src[count];
-			count++;
-		}
-		dst[count] = '\0';
-	}
-	return (size_src);
-}
-
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;
@@ -77,8 +55,13 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	if (!s1 || !s2)
+	if (!s2)
 		return (NULL);
+	if (!s1)
+	{
+		 s1 = (char *)malloc(1 * sizeof(char));
+		s1[0] = '\0';
+	}
 	string = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!string)
 		return (NULL);
