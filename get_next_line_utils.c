@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:53:19 by lpaixao-          #+#    #+#             */
-/*   Updated: 2023/12/07 20:21:40 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2023/12/11 19:19:53 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,28 @@ char	*ft_strchr(const char *s, int c)
 	if (c == '\0')
 		return (&st[i]);
 	return (NULL);
+}
+
+int	my_strchr(const char *s, int c)
+{
+	int		i;
+	char	ch;
+	char	*st;
+
+	i = 0;
+	ch = (char)c;
+	st = (char *)s;
+	while (st[i] != '\n' && st[i])
+	{
+		if (st[i] == ch)
+			return i;
+		i++;
+	}
+/*	if (c == '\n')
+		return i;
+	if (c == '\0')
+		return i;*/
+	return i;
 }
 
 long unsigned int	ft_strlen(const char *str)
