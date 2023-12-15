@@ -12,13 +12,14 @@
 
 #include "get_next_line.h"
 
-// helper functions
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;
 	char	ch;
 	char	*st;
 
+	if (!s)
+		return (0);
 	i = 0;
 	ch = (char)c;
 	st = (char *)s;
@@ -95,7 +96,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	string[i] = '\0';
-/*	if (s1)
+/*	if (s1) // Com esse free comentado, o código funciona mas (obviamente) dá leak. Com esse free, o código dá free(): invalid pointer e Aborted (core dumped).
 		free(s1);*/
 	return (string);
 }

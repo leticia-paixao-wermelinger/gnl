@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*read_line(char *str, int fd)
 {
@@ -39,7 +38,6 @@ static char	*read_line(char *str, int fd)
 		}
 		free(file);
 	}
-	printf("Teste dentro da read_line pós loop: %s\n", str);
 	return (str);
 }
 
@@ -48,15 +46,16 @@ static char	*cut_line(char *str, char **extra)
 	char	*temp;
 
 	temp = NULL;
-	printf("entrou na cut_line com str = %s\nEntrou na cut_line com extra = %s\n", str, *extra);
+	if (!str)
+		return (NULL);
 	if (ft_strchr(str, '\n')[0] == '\n')
 	{
 		*extra = ft_substr(str, my_strchr(str, '\n'), ft_strlen(str));
 		temp = ft_substr(str, 0, my_strchr(str, '\n'));
-		printf("extra no final de cut_line = %s\n", *extra);
-		free(str);
+/*		if (str) // Com esse free comentado, o código funciona mas (obviamente) dá leak. Com
+ *		esse free, o código dá free(): invalid pointer e Aborted (core dumped).
+			free(str);*/
 		str = temp;
-		printf("str no final de cut_line = %s\n", str);
 	}
 	return (str);
 }
@@ -87,11 +86,8 @@ char    *get_next_line(int fd)
 	str = NULL;
 	if (!extra)
 		extra = NULL;
-	printf("Extra no início da função gnl = %s\n", extra);
 	if (extra)
 	{
-		printf("extra no início check_extra = %s\n", extra);
-		printf("str antes de check_extra = %s\n", str);
 		str = ft_strdup(extra);
 		free(extra);
 		extra = NULL;
@@ -102,12 +98,8 @@ char    *get_next_line(int fd)
 			str = cut_line(str, &extra); 
 			return (str);
 		}
-		printf("extra após check_extra = %s\n", extra);
-		printf("str após check_extra = %s\n", str);
 		str = read_line(str, fd);
-		printf("Teste pós read_line\n");
 		str = cut_line(str, &extra);
-		printf("extra após cut_line = %s\n", extra);
 	}
 	else
 	{
