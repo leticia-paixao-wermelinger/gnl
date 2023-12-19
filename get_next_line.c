@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:22:18 by lpaixao-          #+#    #+#             */
-/*   Updated: 2023/12/19 17:23:18 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:06:04 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,16 @@ static char	*cut_line(char *str, char **extra)
 		return (NULL);
 	if (ft_strchr(str, '\n')[0] == '\n')
 	{
-		*extra = ft_substr(str, my_strchr(str, '\n'), ft_strlen(str));
-		str = ft_substr(temp, 0, my_strchr(str, '\n'));
-		str[my_strchr(str, '\n')] = '\0';
+		*extra = ft_substr(str, my_strchr(str, '\n') + 1, ft_strlen(str));
+		str = ft_substr(temp, 0, my_strchr(str, '\n') + 1);
+		str[my_strchr(str, '\n') + 1] = '\0';
 		//if (str) // Com esse free comentado, o código funciona mas (obviamente) dá leak. Com		esse free, o código dá free(): invalid pointer e Aborted (core dumped).
 		//	free(str);
 //		str = temp;
 		//if (temp)
 		//	free(temp);
 	}
+	free(temp);
 	//printf("----------->:%s:\n", str);
 	return (str);
 }
@@ -106,8 +107,6 @@ char    *get_next_line(int fd)
 		str = ft_strdup(extra);
 		free(extra);
 		extra = NULL;
-		if (str[0] == '\n')
-			str = &str[1];
 		if (ft_strchr(str, '\n')[0] == '\n')
 		{
 			//temp = str;
@@ -117,7 +116,6 @@ char    *get_next_line(int fd)
 		}
 		//temp = str;
 		str = read_line(str, fd);
-		//free(temp);
 		//temp = str;
 		str = cut_line(str, &extra);
 		//free(temp);
