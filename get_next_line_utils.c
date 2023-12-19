@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:53:19 by lpaixao-          #+#    #+#             */
-/*   Updated: 2023/12/14 18:46:43 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:16:43 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ long unsigned int	ft_strlen(const char *str)
 
 	count = 0;
 	while (str[count] != '\0')
-	{
 		count++;
-	}
 	return (count);
 }
 
@@ -78,7 +76,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	if (!s1)
 	{
-		s1 = (char *)malloc(1 * sizeof(char));
+		s1 = (char *)malloc(sizeof(char));
 		s1[0] = '\0';
 	}
 	string = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));

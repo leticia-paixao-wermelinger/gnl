@@ -6,21 +6,26 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:22:18 by lpaixao-          #+#    #+#             */
-/*   Updated: 2023/12/14 18:46:23 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:23:18 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+
 
 static char	*read_line(char *str, int fd)
 {
 	char		*file;
+//	char		*temp;
 	int			ret_r;
 
 	ret_r = 1;
+	file = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!file)
+		return (NULL);
 	while (ret_r > 0)
 	{
-		file = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 		ret_r = read(fd, file, BUFFER_SIZE); // foguete não dá ré
 		if (ret_r <= 0)
 		{
@@ -29,15 +34,20 @@ static char	*read_line(char *str, int fd)
 		}
 		file[ret_r] = '\0';
 		if (ft_strchr(file, '\n')[0] != '\n')
+		{
+//			temp = str;
 			str = ft_strjoin(str, file);
+//			free(temp);
+		}
 		else if (ft_strchr(file, '\n')[0] == '\n' || ft_strchr(file, '\0')[0] == '\0')
 		{
+//			temp = str;
 			str = ft_strjoin(str, file);
-			free(file);
+//			free(temp);
 			break ;
 		}
-		free(file);
 	}
+	free(file);
 	return (str);
 }
 
@@ -45,18 +55,22 @@ static char	*cut_line(char *str, char **extra)
 {
 	char	*temp;
 
-	temp = NULL;
+	//printf("----------------:%s:\n", str);
+	temp = str;
 	if (!str)
 		return (NULL);
 	if (ft_strchr(str, '\n')[0] == '\n')
 	{
 		*extra = ft_substr(str, my_strchr(str, '\n'), ft_strlen(str));
-		temp = ft_substr(str, 0, my_strchr(str, '\n'));
-/*		if (str) // Com esse free comentado, o código funciona mas (obviamente) dá leak. Com
- *		esse free, o código dá free(): invalid pointer e Aborted (core dumped).
-			free(str);*/
-		str = temp;
+		str = ft_substr(temp, 0, my_strchr(str, '\n'));
+		str[my_strchr(str, '\n')] = '\0';
+		//if (str) // Com esse free comentado, o código funciona mas (obviamente) dá leak. Com		esse free, o código dá free(): invalid pointer e Aborted (core dumped).
+		//	free(str);
+//		str = temp;
+		//if (temp)
+		//	free(temp);
 	}
+	//printf("----------->:%s:\n", str);
 	return (str);
 }
 
@@ -81,6 +95,7 @@ static char	*ft_strdup(const char *s)
 char    *get_next_line(int fd)
 {
 	static char	*extra;
+	//char		*temp;
 	char		*str;
 
 	str = NULL;
@@ -95,16 +110,26 @@ char    *get_next_line(int fd)
 			str = &str[1];
 		if (ft_strchr(str, '\n')[0] == '\n')
 		{
-			str = cut_line(str, &extra); 
+			//temp = str;
+			str = cut_line(str, &extra);
+			//free(temp);
 			return (str);
 		}
+		//temp = str;
 		str = read_line(str, fd);
+		//free(temp);
+		//temp = str;
 		str = cut_line(str, &extra);
+		//free(temp);
 	}
 	else
 	{
+		//temp = str;
 		str = read_line(str, fd);
+		//free(temp);
+		//temp = str;
 		str = cut_line(str, &extra);
+		//free(temp);
 	}
 	return (str);
 }
