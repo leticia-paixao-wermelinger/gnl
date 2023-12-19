@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: vde-vasc <vde-vasc@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:53:19 by lpaixao-          #+#    #+#             */
-/*   Updated: 2023/12/19 17:16:43 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2023/12/19 19:05:05 by vde-vasc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	string[i] = '\0';
 /*	if (s1) // Com esse free comentado, o código funciona mas (obviamente) dá leak. Com esse free, o código dá free(): invalid pointer e Aborted (core dumped).
 		free(s1);*/
+	free(s1);
 	return (string);
 }
 

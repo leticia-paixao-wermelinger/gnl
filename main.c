@@ -22,7 +22,7 @@ int	main()
 	while (ret)
 	{
 		printf("Linha %i:\n", i);
-		printf("%s\n", ret);
+		printf("%s", ret);
 		if (ret)
 		{
 			free(ret);
@@ -30,10 +30,8 @@ int	main()
 		}
 		ret = get_next_line(fd);
 		i++;
-		if (i > 10)
-			break ;
 	}
-//	free(ret);
+	free(ret);
 	if (fd >= 3)
 		close(fd);
 }
