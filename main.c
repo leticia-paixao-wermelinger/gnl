@@ -6,13 +6,11 @@ int	main()
 //	char	*filename = "/text_test.txt";
 //	int		fd = open("./text2.txt", O_RDONLY);
 	int		fd = open("./text_test.txt", O_RDONLY);
+//	int     fd = open("./text3.txt", O_RDONLY);
 	int		i = 1;
 	char	*ret;
 //	char	*text;
 
-/*	ret = get_next_line(fd);
-	printf("teste pós gnl. \nO retorno da GNL foi: %s \n", ret);
-	free(ret);*/
 	if (fd <= 0)
 	{
 		printf("open retornou erro com fd: %i \n", fd);
@@ -22,7 +20,7 @@ int	main()
 	while (ret)
 	{
 		printf("Linha %i:\n", i);
-		printf("%s\n", ret);
+		printf("%s", ret);
 		if (ret)
 		{
 			free(ret);
@@ -30,10 +28,10 @@ int	main()
 		}
 		ret = get_next_line(fd);
 		i++;
-		if (i > 10)
+		if (i > 100)
 			break ;
 	}
-//	free(ret);
+	free(ret);
 	if (fd >= 3)
 		close(fd);
 }

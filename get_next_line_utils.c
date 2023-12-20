@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 15:53:19 by lpaixao-          #+#    #+#             */
-/*   Updated: 2023/12/19 17:16:43 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:58:16 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,16 @@ int	my_strchr(const char *s, int c)
 	while (st[i] != '\n' && st[i])
 	{
 		if (st[i] == ch)
-			return i;
+			return (i);
 		i++;
 	}
-	return i;
-}
-
-long unsigned int	ft_strlen(const char *str)
-{
-	int	count;
-
-	count = 0;
-	while (str[count] != '\0')
-		count++;
-	return (count);
+	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		i;
-	int		j;
 	char	*string;
 
-	i = 0;
-	j = 0;
 	if (!s2)
 		return (NULL);
 	if (!s1)
@@ -82,6 +68,18 @@ char	*ft_strjoin(char *s1, char *s2)
 	string = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!string)
 		return (NULL);
+	string = my_join(s1, s2, string);
+	free(s1);
+	return (string);
+}
+
+char	*my_join(char *s1, char *s2, char *string)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
 	while (s1[i])
 	{
 		string[i] = s1[i];
@@ -94,8 +92,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		j++;
 	}
 	string[i] = '\0';
-/*	if (s1) // Com esse free comentado, o código funciona mas (obviamente) dá leak. Com esse free, o código dá free(): invalid pointer e Aborted (core dumped).
-		free(s1);*/
 	return (string);
 }
 
