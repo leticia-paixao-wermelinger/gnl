@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 19:22:18 by lpaixao-          #+#    #+#             */
-/*   Updated: 2023/12/20 20:33:24 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:30:00 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char	*get_next_line(int fd)
 	if (extra)
 	{
 		str = ft_strdup(extra);
+		//str = ft_strjoin(str, extra);
 		free(extra);
 		extra = NULL;
 		if (ft_strchr(str, '\n')[0] == '\n')
