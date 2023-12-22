@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*read_line(char *str, int fd, int ret_r)
 {
@@ -74,7 +73,6 @@ char	*ft_strdup(const char *s)
 		i++;
 	}
 	dest[i] = '\0';
-//	free((char *)s);
 	return (dest);
 }
 
