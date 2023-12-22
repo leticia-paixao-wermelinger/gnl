@@ -73,7 +73,6 @@ char	*ft_strdup(const char *s)
 		i++;
 	}
 	dest[i] = '\0';
-//	free((char *)s);
 	return (dest);
 }
 
@@ -94,25 +93,24 @@ char	*get_next_line(int fd)
 
 	str = NULL;
 	if (!extra)
-		extra = NULL;
-	if (extra)
 	{
-		str = ft_strdup(extra);
-		//str = ft_strjoin(str, extra);
+		str = read_line(str, fd, 1);
+		str = cut_line(str, &extra);
+		return (str);
+	}
+	if (!ft_strlen(extra))
+	{
 		free(extra);
-		extra = NULL;
-		if (ft_strchr(str, '\n')[0] == '\n')
-		{
-			str = cut_line(str, &extra);
-			return (str);
-		}
-		str = read_line(str, fd, 1);
-		str = cut_line(str, &extra);
+		return (str);
 	}
-	else
+	str = ft_strdup(extra);
+	free(extra);
+	if (ft_strchr(str, '\n')[0] == '\n')
 	{
-		str = read_line(str, fd, 1);
 		str = cut_line(str, &extra);
+		return (str);
 	}
+	str = read_line(str, fd, 1);
+	str = cut_line(str, &extra);
 	return (str);
 }
