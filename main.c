@@ -1,12 +1,28 @@
 #include "get_next_line.h"
+
 #include <stdio.h>
+
+int	my_putstr(char *s)
+{
+	int	i;
+
+	if (!s)
+		s = "(null)";
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
+}
 
 int	main()
 {
 //	char	*filename = "/text_test.txt";
-//	int		fd = open("./text2.txt", O_RDONLY);
-	int		fd = open("./text_test.txt", O_RDONLY);
-//	int     fd = open("./text3.txt", O_RDONLY);
+	int		fd = open("./text2.txt", O_RDONLY);
+//	int		fd = open("./text_test.txt", O_RDONLY);
+//	int     fd = open("./41_no_nl", O_RDONLY);
 	int		i = 1;
 	char	*ret;
 //	char	*text;
@@ -20,7 +36,7 @@ int	main()
 	while (ret)
 	{
 		printf("Linha %i:\n", i);
-		printf("%s", ret);
+		my_putstr(ret);
 		if (ret)
 		{
 			free(ret);

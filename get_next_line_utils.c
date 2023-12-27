@@ -101,16 +101,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*substr;
 
 	i = 0;
-	substr = (char *)malloc((len * sizeof(char)) + 1);
+	substr = (char *)malloc((len + 1) * sizeof(char));
 	if (!substr || !s)
 		return (NULL);
-	while (len > 0)
+	while ((size_t)i < len)
 	{
 		if (start >= ft_strlen(s))
 			substr[i++] = '\0';
 		else
 			substr[i++] = s[start++];
-		len--;
 	}
 	substr[i] = '\0';
 	return (substr);

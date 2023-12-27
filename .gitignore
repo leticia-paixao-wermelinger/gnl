@@ -9,3 +9,6 @@
 **/*.exe
 **/*.mod
 **/*.gch
+gnl-station-tester/
+gnlTester/
+
